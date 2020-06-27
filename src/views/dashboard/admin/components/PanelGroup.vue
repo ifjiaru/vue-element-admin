@@ -7,9 +7,10 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Visits
+            Total Merchants
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <p v-if="!merchants">Loading</p>
+          <count-to v-if="merchants" :start-val="0" :end-val="merchants.length" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -57,10 +58,21 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import Axios from 'axios'
 
 export default {
   components: {
     CountTo
+  },
+  data() {
+    return {
+      merchants: null
+    }
+  },
+  mounted() {
+    Axios
+      .get('https://sosure-app-testing.herokuapp.com/internal-api/merchants')
+      .then(response => (this.merchants = response.data.data))
   },
   methods: {
     handleSetLineChartData(type) {
