@@ -18,10 +18,6 @@ export function validUsername(str) {
   const valid_map = ['admin', 'editor']
   return valid_map.indexOf(str.trim()) >= 0
 }
-export function validPassword(str) {
-  const valid_map = ['sosureadmin']
-  return valid_map.indexOf(str.trim()) >= 0
-}
 
 /**
  * @param {string} url
