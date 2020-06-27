@@ -75,6 +75,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import { validPassword } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
 
 export default {
@@ -89,8 +90,8 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+      if (!validPassword(value)) {
+        callback(new Error('The password is wrong'))
       } else {
         callback()
       }
@@ -98,7 +99,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
